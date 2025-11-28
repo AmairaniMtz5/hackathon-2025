@@ -13,57 +13,79 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
-  <div class="dashboard-container">
-    <aside class="sidebar">
-      <div class="logo-section">
-        <img src="../../assets/logo.png" alt="Logo Boza" class="logo-small">
-        <h2>Boza Admin</h2>
+  <div class="dashboard-shell">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="notify" id="notifyBell">
+          <span class="bell">🔔</span>
+          <span class="badge" id="notifyCount">1</span>
+        </div>
       </div>
-      <nav class="menu">
-        <a href="Dashboard.html" class="menu-item active">📊 Dashboard</a>
-        <a href="Usuarios.html" class="menu-item">👥 Usuarios</a>
-        <a href="Monitoreo.html" class="menu-item">🔍 Monitoreo</a>
-        <a href="Mapa.html" class="menu-item">🗺️ Mapa</a>
-        <a href="Historial.html" class="menu-item">📋 Historial</a>
-      </nav>
-      <button id="logoutBtn" class="logout-btn">🚪 Cerrar Sesión</button>
-    </aside>
+      <div class="topbar-right user-tile" id="userTile">
+        <div class="user-icon" id="userAvatar">👤</div>
+        <div class="user-meta">
+          <strong id="userEmail">Admin</strong>
+          <small id="userSubtitle">Boza Generales</small>
+        </div>
+        <button id="logoutBtn" class="logout-compact" title="Cerrar sesión">⎋</button>
+      </div>
+    </div>
 
-    <main class="main-content">
-      <header class="header">
-        <h1>Dashboard</h1>
-        <div class="user-info">
-          <span id="userEmail">Cargando...</span>
-          <div class="user-avatar" id="userAvatar">👤</div>
-        </div>
-      </header>
+    <div class="layout">
+      <aside class="side-panel">
+        <h2 class="panel-title">MENÚ PRINCIPAL</h2>
+        <nav class="panel-menu">
+          <a href="Dashboard.html" class="panel-item active">
+            <span class="panel-icon">📝</span>
+            <span class="panel-text">Resumen</span>
+          </a>
+          <a href="Monitoreo.html" class="panel-item">
+            <span class="panel-icon">📈</span>
+            <span class="panel-text">Monitoreo</span>
+          </a>
+            <a href="Historial.html" class="panel-item">
+            <span class="panel-icon">⏱️</span>
+            <span class="panel-text">Historial</span>
+          </a>
+          <a href="Usuarios.html" class="panel-item">
+            <span class="panel-icon">👥</span>
+            <span class="panel-text">Usuarios</span>
+          </a>
+        </nav>
+      </aside>
 
-      <div class="stats-grid">
-        <div class="stat-card">
-          <h3>Usuarios Activos</h3>
-          <p class="stat-number" id="activeUsers">--</p>
-        </div>
-        <div class="stat-card">
-          <h3>Recolecciones Hoy</h3>
-          <p class="stat-number" id="collectionsToday">--</p>
-        </div>
-        <div class="stat-card">
-          <h3>Material Reciclado</h3>
-          <p class="stat-number" id="recycledMaterial">-- kg</p>
-        </div>
-        <div class="stat-card">
+      <main class="workspace">
+        <section class="panel-header">
+          <h1>Panel de Control</h1>
+          <p class="last-update">Última actualización <span id="lastUpdate">--:--</span></p>
+        </section>
+
+        <section class="cards-row" id="summaryCards">
+          <div class="info-card" id="cardUsers">
+            <h3>Usuarios Activos</h3>
+            <p class="value" id="activeUsers">--</p>
+          </div>
+          <div class="info-card" id="cardCollections">
+            <h3>Recolecciones Hoy</h3>
+            <p class="value" id="collectionsToday">--</p>
+          </div>
+          <div class="info-card" id="cardMaterial">
+            <h3>Material Reciclado</h3>
+            <p class="value" id="recycledMaterial">-- kg</p>
+          </div>
+        </section>
+
+        <section class="wide-card" id="wideActivity">
           <h3>CO₂ Ahorrado</h3>
-          <p class="stat-number" id="co2Saved">-- kg</p>
-        </div>
-      </div>
+          <p class="value large" id="co2Saved">-- kg</p>
+        </section>
 
-      <div class="data-section">
-        <h2>Actividad Reciente</h2>
-        <div id="recentActivity" class="activity-list">
-          <p>Cargando actividad...</p>
-        </div>
-      </div>
-    </main>
+        <section class="activity-block">
+          <h2>Actividad Reciente</h2>
+          <div id="recentActivity" class="activity-list"><p>Cargando actividad...</p></div>
+        </section>
+      </main>
+    </div>
   </div>
 
   <!-- Scripts -->
