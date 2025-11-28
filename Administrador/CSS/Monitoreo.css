@@ -1,44 +1,104 @@
-/* Estilos específicos de Monitoreo, reutilizando la paleta de Dashboard.css */
+/* Monitoreo page styles: reuses Dashboard.css variables */
 
+/* Layout */
 .monitor-grid {
-	display: grid;
-	grid-template-columns: 2.2fr 1fr;
-	gap: 1.6rem;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-top: 8px;
+  max-width: 100%;
+  align-items: start;
 }
 
-.monitor-card {
-	background: var(--accent);
-	border: 1px solid var(--border);
-	border-radius: 24px;
-	box-shadow: 0 4px 16px var(--shadow);
-	min-height: 360px;
+@media (max-width: 1100px) {
+  .monitor-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-.monitor-card.large {
-	min-height: 520px;
-	background: #dfe7d7; /* pastel verde suave para grandes áreas */
+/* Cards */
+.map-card,
+.status-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px var(--shadow);
+  overflow: hidden;
 }
 
-.monitor-card.small {
-	display: flex;
-	flex-direction: column;
-	min-height: 520px;
-	background: #dfe7d7; /* consistente con el panel grande */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(0deg, var(--hover), transparent);
 }
 
-.monitor-card.small .top-strip {
-	height: 56px;
-	background: var(--primary);
-	border-radius: 20px;
-	margin: 1rem 1rem 0.5rem 1rem;
+.card-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-dark);
 }
 
-.monitor-card.small .small-body {
-	flex: 1;
-	padding: 1rem;
+.card-header.accent {
+  background: linear-gradient(0deg, var(--beige), #fff0 60%);
 }
 
-@media (max-width: 1080px) {
-	.monitor-grid { grid-template-columns: 1fr; }
-	.monitor-card.large, .monitor-card.small { min-height: 320px; }
+/* Map container */
+.map-container {
+  width: 100%;
+  height: clamp(320px, 55vh, 460px);
+  border-radius: 0 0 16px 16px;
+  background: var(--accent);
+}
+
+@media (max-width: 1100px) {
+  .map-container {
+    height: 400px;
+  }
+}
+
+/* Status list */
+.status-list {
+  list-style: none;
+  margin: 0;
+  padding: 8px 12px;
+}
+
+.status-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 6px;
+  border-bottom: 1px dashed var(--border);
+  color: var(--text-medium);
+}
+
+.status-list li:last-child {
+  border-bottom: none;
+}
+
+.status-list strong {
+  color: var(--text-dark);
+}
+
+/* Minor tweaks aligning with dashboard spacing */
+.panel-header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.panel-header h1 {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+  color: var(--text-dark);
+}
+
+.panel-header .last-update {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 12px;
 }

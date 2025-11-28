@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Historial - Boza</title>
+  <link rel="stylesheet" href="../CSS/Dashboard.css">
+  <link rel="stylesheet" href="../CSS/Historial.css">
+</head>
+<body>
+  <div class="dashboard-shell">
+    <div class="topbar">
+      <div class="topbar-left">
+        <div class="notify" id="notifyBell">
+          <span class="bell">🔔</span>
+          <span class="badge" id="notifyCount">3</span>
+        </div>
+      </div>
+      <div class="topbar-right user-tile" id="userTile">
+        <div class="user-icon" id="userAvatar">👤</div>
+        <div class="user-meta">
+          <strong id="userEmail">Admin</strong>
+          <small>Boza Generales</small>
+        </div>
+        <button id="logoutBtn" class="logout-compact" title="Cerrar sesión">⎋</button>
+      </div>
+    </div>
+
+    <div class="layout">
+      <aside class="side-panel">
+        <h2 class="panel-title">MENÚ PRINCIPAL</h2>
+        <nav class="panel-menu">
+          <a href="Dashboard.html" class="panel-item">
+            <span class="panel-icon">📝</span>
+            <span class="panel-text">Resumen</span>
+          </a>
+          <a href="Monitoreo.html" class="panel-item">
+            <span class="panel-icon">📈</span>
+            <span class="panel-text">Monitoreo</span>
+          </a>
+          <a href="Historial.html" class="panel-item active">
+            <span class="panel-icon">⏱️</span>
+            <span class="panel-text">Historial</span>
+          </a>
+          <a href="Usuarios.html" class="panel-item">
+            <span class="panel-icon">👥</span>
+            <span class="panel-text">Usuarios</span>
+          </a>
+        </nav>
+      </aside>
+
+      <main class="workspace historial-workspace">
+        <section class="panel-header" aria-label="Encabezado historial">
+          <div class="header-left">
+            <h1>Historial semanal</h1>
+            <p class="last-update">Registros organizados para generar reportes impresos claros.</p>
+          </div>
+          <div class="header-actions">
+            <button class="cta" id="refreshBtn" aria-label="Actualizar historial">Actualizar</button>
+          </div>
+        </section>
+
+        <section class="historial-legend" aria-label="Leyenda tipo de residuo, estado">
+          <div>
+            <strong>Tipo de residuo:</strong>
+            <span class="type-chip type-plastic">PET/Plástico</span>
+            <span class="type-chip type-organic">Orgánico</span>
+            <span class="type-chip type-cardboard">Cartón</span>
+            <span class="type-chip type-trash">No Reciclable</span>
+          </div>
+          <div>
+            <strong>Estado:</strong>
+            <span class="status-chip status-completed">Completado</span>
+            <span class="status-chip status-delay">Retraso</span>
+          </div>
+        </section>
+
+        <section class="weeks-grid" id="weeksGrid" aria-live="polite"></section>
+
+        <section class="week-detail" id="weekDetail" aria-live="polite">
+          <p class="detail-placeholder">Selecciona una semana para ver su reporte detallado en tabla.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-OjbgDDi57YjG9EXVvYFFAIV45LyD6KojjEHwiObgM08j+EicZbLxwl2TnXh9Z6n7XQpgC2QhmqPcj5PD1mPDsg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.6.0/html2canvas.min.js" integrity="sha512-rn5GQsF8X7m2v8/oKZlycSA9vJNt0cUW59wzCwL6E0sm8GgZ7H+mum8VFtGkLyQL9nK61DV9kcyQ/8+z2iQSbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="../JS/Historial.js"></script>
+</body>
+</html>

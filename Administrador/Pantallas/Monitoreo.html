@@ -3,11 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Monitoreo - Boza</title>
-	<link rel="stylesheet" href="../CSS/Dashboard.css">
-	<link rel="stylesheet" href="../CSS/Monitoreo.css">
-
-	<!-- Firebase SDK -->
+  <title>Monitoreo - Boza</title>
+  <link rel="stylesheet" href="../CSS/Dashboard.css">
+  <link rel="stylesheet" href="../CSS/Monitoreo.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>	<!-- Firebase SDK (compat) -->
 	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
@@ -15,6 +14,7 @@
 </head>
 <body>
 	<div class="dashboard-shell">
+		<!-- Topbar -->
 		<div class="topbar">
 			<div class="topbar-left">
 				<div class="notify" id="notifyBell">
@@ -26,13 +26,14 @@
 				<div class="user-icon" id="userAvatar">👤</div>
 				<div class="user-meta">
 					<strong id="userEmail">Admin</strong>
-					<small id="userSubtitle">Boza Generales</small>
+					<small>Boza Generales</small>
 				</div>
 				<button id="logoutBtn" class="logout-compact" title="Cerrar sesión">⎋</button>
 			</div>
 		</div>
 
 		<div class="layout">
+			<!-- Side panel -->
 			<aside class="side-panel">
 				<h2 class="panel-title">MENÚ PRINCIPAL</h2>
 				<nav class="panel-menu">
@@ -55,26 +56,32 @@
 				</nav>
 			</aside>
 
+			<!-- Workspace -->
 			<main class="workspace">
-				<section class="panel-header">
+				<section class="panel-header" aria-label="Encabezado de monitoreo">
 					<div class="header-left">
 						<h1>Monitoreo</h1>
+						<p class="last-update">Última actualización <span id="lastUpdate">--:--</span></p>
 					</div>
 					<div class="header-actions">
-						<button class="cta" id="refreshBtn" aria-label="Actualizar monitoreo">Actualizar</button>
+						<button class="cta" id="refreshBtn">Actualizar</button>
 					</div>
 				</section>
 
 				<section class="monitor-grid">
-					<div class="monitor-card large" aria-label="Panel principal de monitoreo">
-						<!-- Aquí puedes renderizar mapa, gráfica o tablero en vivo -->
-					</div>
-
-					<aside class="monitor-card small" aria-label="Indicadores secundarios">
-						<div class="top-strip" aria-hidden="true"></div>
-						<div class="small-body">
-							<!-- Indicadores/alertas/resumen lateral -->
-						</div>
+					<article class="map-card" role="region" aria-label="Mapa UPT">
+					<header class="card-header">
+						<h3>Mapa UPT</h3>
+					</header>
+					<div id="mapContainer" class="map-container"></div>
+				</article>					<aside class="status-card" role="region" aria-label="Indicadores">
+					<header class="card-header accent">
+						<h3>Indicadores</h3>
+					</header>
+					<ul class="status-list" id="statusList">
+						<li><span>Contenedores llenos</span><strong id="kpiContainers">--</strong></li>
+						<li><span>Contenedores vacíos</span><strong id="kpiEvents">--</strong></li>
+					</ul>
 					</aside>
 				</section>
 			</main>
@@ -82,6 +89,7 @@
 	</div>
 
 	<!-- Scripts -->
+	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 	<script src="../../firebase-config.js"></script>
 	<script src="../JS/Monitoreo.js"></script>
 </body>
