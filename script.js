@@ -56,55 +56,57 @@ form.addEventListener('submit', async (e) => {
   }
 
   feedback.textContent = 'Iniciando sesión...';
-  
+
+  // Fallback local si Firebase no está configurado
+  const firebaseReady = typeof auth !== 'undefined' && typeof db !== 'undefined' && typeof firebase !== 'undefined' && typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey !== 'TU_API_KEY_AQUI';
+
+  if (!firebaseReady) {
+    // Credenciales locales de prueba
+    const LOCAL_USERS = [
+      { email: 'admin@boza.com', password: 'Boza2025!' },
+      { email: 'user@boza.com', password: 'BozaUser123!' }
+    ];
+    const found = LOCAL_USERS.find(u => u.email === emailInput.value.trim() && u.password === passwordInput.value);
+    if (found) {
+      feedback.textContent = '¡Ingreso exitoso (local)!';
+      feedback.classList.add('success');
+      setTimeout(() => {
+        window.location.href = 'Administrador/Pantallas/Dashboard.html';
+      }, 700);
+    } else {
+      feedback.textContent = 'Credenciales inválidas (modo local).';
+      feedback.classList.add('error');
+    }
+    return;
+  }
+
   try {
     // Autenticación con Firebase
     const userCredential = await auth.signInWithEmailAndPassword(
       emailInput.value.trim(),
       passwordInput.value
     );
-    
     const user = userCredential.user;
-    
-    // Guardar información del usuario en Firestore (opcional)
     await db.collection('usuarios').doc(user.uid).set({
       email: user.email,
       ultimoAcceso: firebase.firestore.FieldValue.serverTimestamp()
     }, { merge: true });
-
     feedback.textContent = '¡Ingreso exitoso!';
     feedback.classList.add('success');
-    
-    // Redirigir al dashboard después de 1 segundo
     setTimeout(() => {
       window.location.href = 'Administrador/Pantallas/Dashboard.html';
     }, 1000);
-    
   } catch (error) {
     console.error('Error de autenticación:', error);
-    
     let mensaje = 'Error al iniciar sesión.';
-    
     switch (error.code) {
-      case 'auth/user-not-found':
-        mensaje = 'Usuario no encontrado.';
-        break;
-      case 'auth/wrong-password':
-        mensaje = 'Contraseña incorrecta.';
-        break;
-      case 'auth/invalid-email':
-        mensaje = 'Correo inválido.';
-        break;
-      case 'auth/user-disabled':
-        mensaje = 'Usuario deshabilitado.';
-        break;
-      case 'auth/too-many-requests':
-        mensaje = 'Demasiados intentos. Intenta más tarde.';
-        break;
-      default:
-        mensaje = `Error: ${error.message}`;
+      case 'auth/user-not-found': mensaje = 'Usuario no encontrado.'; break;
+      case 'auth/wrong-password': mensaje = 'Contraseña incorrecta.'; break;
+      case 'auth/invalid-email': mensaje = 'Correo inválido.'; break;
+      case 'auth/user-disabled': mensaje = 'Usuario deshabilitado.'; break;
+      case 'auth/too-many-requests': mensaje = 'Demasiados intentos. Intenta más tarde.'; break;
+      default: mensaje = `Error: ${error.message}`;
     }
-    
     feedback.textContent = mensaje;
     feedback.classList.add('error');
   }
@@ -125,6 +127,12 @@ registerBtn?.addEventListener('click', async () => {
   if (!okEmail || !okPass) {
     feedback.textContent = 'Revisa correo y contraseña (mín. 6).';
     feedback.classList.add('error');
+    return;
+  }
+  const firebaseReady = typeof auth !== 'undefined' && typeof db !== 'undefined' && typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey !== 'TU_API_KEY_AQUI';
+  if (!firebaseReady) {
+    feedback.textContent = 'Modo local: crea usuarios directamente en Firebase más tarde.';
+    feedback.classList.add('success');
     return;
   }
   feedback.textContent = 'Creando cuenta...';
@@ -161,6 +169,12 @@ forgotBtn?.addEventListener('click', async () => {
   const email = emailInput.value.trim();
   if (!email) {
     emailError.textContent = 'Ingresa tu correo para recuperar.';
+    return;
+  }
+  const firebaseReady = typeof auth !== 'undefined' && typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey !== 'TU_API_KEY_AQUI';
+  if (!firebaseReady) {
+    feedback.textContent = 'Modo local: recuperación de contraseña no disponible.';
+    feedback.classList.add('error');
     return;
   }
   try {
