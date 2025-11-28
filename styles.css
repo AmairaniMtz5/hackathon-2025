@@ -95,6 +95,9 @@ body {
 .btn.primary:hover { background: var(--dark-green); }
 .btn.secondary { background: var(--powder-blue); color: var(--dark-green); }
 .btn.secondary:hover { background: var(--glaucous); color: #fff; }
+.alt-actions { display:flex; gap:.6rem; justify-content:center; margin-top: .6rem; }
+.btn.link { flex:unset; background: transparent; color: var(--logo-brown); border: none; padding: .25rem .4rem; font-weight: 600; cursor: pointer; }
+.btn.link:hover { color: var(--moss-green); text-decoration: underline; }
 .feedback {
   margin-top: 1.2rem;
   font-size: .9rem;

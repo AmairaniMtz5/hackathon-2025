@@ -5,6 +5,8 @@ const emailError = document.getElementById('emailError');
 const passwordError = document.getElementById('passwordError');
 const feedback = document.getElementById('formFeedback');
 const togglePasswordBtn = document.getElementById('togglePassword');
+const registerBtn = document.getElementById('registerBtn');
+const forgotBtn = document.getElementById('forgotBtn');
 const yearSpan = document.getElementById('year');
 
 yearSpan.textContent = new Date().getFullYear();
@@ -112,4 +114,62 @@ togglePasswordBtn.addEventListener('click', () => {
   const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
   passwordInput.setAttribute('type', type);
   togglePasswordBtn.textContent = type === 'password' ? '👁️' : '🙈';
+});
+
+// Crear cuenta
+registerBtn?.addEventListener('click', async () => {
+  feedback.className = 'feedback';
+  feedback.textContent = '';
+  const okEmail = validateEmail();
+  const okPass = validatePassword();
+  if (!okEmail || !okPass) {
+    feedback.textContent = 'Revisa correo y contraseña (mín. 6).';
+    feedback.classList.add('error');
+    return;
+  }
+  feedback.textContent = 'Creando cuenta...';
+  try {
+    const userCredential = await auth.createUserWithEmailAndPassword(
+      emailInput.value.trim(),
+      passwordInput.value
+    );
+    const user = userCredential.user;
+    await db.collection('usuarios').doc(user.uid).set({
+      email: user.email,
+      creadoEn: firebase.firestore.FieldValue.serverTimestamp(),
+      rol: 'usuario'
+    }, { merge: true });
+    feedback.textContent = 'Cuenta creada. Iniciando sesión...';
+    feedback.classList.add('success');
+    setTimeout(() => {
+      window.location.href = 'Administrador/Pantallas/Dashboard.html';
+    }, 900);
+  } catch (error) {
+    console.error('Error creando cuenta:', error);
+    let mensaje = 'No se pudo crear la cuenta.';
+    if (error.code === 'auth/email-already-in-use') mensaje = 'El correo ya está en uso.';
+    if (error.code === 'auth/invalid-email') mensaje = 'Correo inválido.';
+    if (error.code === 'auth/weak-password') mensaje = 'Contraseña muy débil.';
+    feedback.textContent = mensaje;
+    feedback.classList.add('error');
+  }
+});
+
+// Olvidé contraseña
+forgotBtn?.addEventListener('click', async () => {
+  feedback.className = 'feedback';
+  const email = emailInput.value.trim();
+  if (!email) {
+    emailError.textContent = 'Ingresa tu correo para recuperar.';
+    return;
+  }
+  try {
+    await auth.sendPasswordResetEmail(email);
+    feedback.textContent = 'Te enviamos un correo para recuperar la contraseña.';
+    feedback.classList.add('success');
+  } catch (error) {
+    console.error('Error enviando reset:', error);
+    feedback.textContent = 'No se pudo enviar el correo de recuperación.';
+    feedback.classList.add('error');
+  }
 });
