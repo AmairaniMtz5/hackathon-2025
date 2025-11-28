@@ -55,34 +55,39 @@
       </aside>
 
       <main class="workspace">
-        <section class="panel-header">
-          <h1>Panel de Control</h1>
-          <p class="last-update">Última actualización <span id="lastUpdate">--:--</span></p>
+        <section class="panel-header" aria-label="Encabezado del panel de control">
+          <div class="header-left">
+            <h1>Panel de Control</h1>
+            <p class="last-update">Última actualización <span id="lastUpdate">--:--</span></p>
+          </div>
+          <div class="header-actions">
+            <button class="cta" id="refreshBtn" aria-label="Actualizar panel">Actualizar</button>
+          </div>
         </section>
 
         <section class="cards-row" id="summaryCards">
-          <div class="info-card" id="cardUsers">
-            <h3>Usuarios Activos</h3>
+          <div class="info-card" id="cardUsers" role="region" aria-labelledby="users-title">
+            <h3 id="users-title">Usuarios Activos</h3>
             <p class="value" id="activeUsers">--</p>
           </div>
-          <div class="info-card" id="cardCollections">
-            <h3>Recolecciones Hoy</h3>
+          <div class="info-card" id="cardCollections" role="region" aria-labelledby="collections-title">
+            <h3 id="collections-title">Recolecciones Hoy</h3>
             <p class="value" id="collectionsToday">--</p>
           </div>
-          <div class="info-card" id="cardMaterial">
-            <h3>Material Reciclado</h3>
+          <div class="info-card" id="cardMaterial" role="region" aria-labelledby="material-title">
+            <h3 id="material-title">Material Reciclado</h3>
             <p class="value" id="recycledMaterial">-- kg</p>
           </div>
         </section>
 
-        <section class="wide-card" id="wideActivity">
-          <h3>CO₂ Ahorrado</h3>
+        <section class="wide-card" id="wideActivity" role="region" aria-labelledby="co2-title">
+          <h3 id="co2-title">CO₂ Ahorrado</h3>
           <p class="value large" id="co2Saved">-- kg</p>
         </section>
 
         <section class="activity-block">
           <h2>Actividad Reciente</h2>
-          <div id="recentActivity" class="activity-list"><p>Cargando actividad...</p></div>
+          <div id="recentActivity" class="activity-list" aria-live="polite"><p>Cargando actividad...</p></div>
         </section>
       </main>
     </div>
