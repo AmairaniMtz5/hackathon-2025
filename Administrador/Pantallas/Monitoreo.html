@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Monitoreo - Boza</title>
+	<link rel="stylesheet" href="../CSS/Dashboard.css">
+	<link rel="stylesheet" href="../CSS/Monitoreo.css">
+
+	<!-- Firebase SDK -->
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+	<div class="dashboard-shell">
+		<div class="topbar">
+			<div class="topbar-left">
+				<div class="notify" id="notifyBell">
+					<span class="bell">🔔</span>
+					<span class="badge" id="notifyCount">1</span>
+				</div>
+			</div>
+			<div class="topbar-right user-tile" id="userTile">
+				<div class="user-icon" id="userAvatar">👤</div>
+				<div class="user-meta">
+					<strong id="userEmail">Admin</strong>
+					<small id="userSubtitle">Boza Generales</small>
+				</div>
+				<button id="logoutBtn" class="logout-compact" title="Cerrar sesión">⎋</button>
+			</div>
+		</div>
+
+		<div class="layout">
+			<aside class="side-panel">
+				<h2 class="panel-title">MENÚ PRINCIPAL</h2>
+				<nav class="panel-menu">
+					<a href="Dashboard.html" class="panel-item">
+						<span class="panel-icon">📝</span>
+						<span class="panel-text">Resumen</span>
+					</a>
+					<a href="Monitoreo.html" class="panel-item active">
+						<span class="panel-icon">📈</span>
+						<span class="panel-text">Monitoreo</span>
+					</a>
+					<a href="Historial.html" class="panel-item">
+						<span class="panel-icon">⏱️</span>
+						<span class="panel-text">Historial</span>
+					</a>
+					<a href="Usuarios.html" class="panel-item">
+						<span class="panel-icon">👥</span>
+						<span class="panel-text">Usuarios</span>
+					</a>
+				</nav>
+			</aside>
+
+			<main class="workspace">
+				<section class="panel-header">
+					<div class="header-left">
+						<h1>Monitoreo</h1>
+					</div>
+					<div class="header-actions">
+						<button class="cta" id="refreshBtn" aria-label="Actualizar monitoreo">Actualizar</button>
+					</div>
+				</section>
+
+				<section class="monitor-grid">
+					<div class="monitor-card large" aria-label="Panel principal de monitoreo">
+						<!-- Aquí puedes renderizar mapa, gráfica o tablero en vivo -->
+					</div>
+
+					<aside class="monitor-card small" aria-label="Indicadores secundarios">
+						<div class="top-strip" aria-hidden="true"></div>
+						<div class="small-body">
+							<!-- Indicadores/alertas/resumen lateral -->
+						</div>
+					</aside>
+				</section>
+			</main>
+		</div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="../../firebase-config.js"></script>
+	<script src="../JS/Monitoreo.js"></script>
+</body>
+</html>
