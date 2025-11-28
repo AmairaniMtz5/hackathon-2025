@@ -6,6 +6,12 @@
   <title>Boza - Iniciar Sesión</title>
   <link rel="stylesheet" href="styles.css" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
   <main class="login-container">
@@ -39,6 +45,9 @@
   <footer class="footer">
     <small>© <span id="year"></span> Boza · by ecoloop</small>
   </footer>
+  
+  <!-- Scripts -->
+  <script src="firebase-config.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

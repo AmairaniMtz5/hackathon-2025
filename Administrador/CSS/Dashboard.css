@@ -1,0 +1,268 @@
+:root {
+  --moss-green: #7A9445;
+  --dark-green: #243C2C;
+  --powder-blue: #A9B6C4;
+  --vanilla: #ECE69D;
+  --glaucous: #59789F;
+  --logo-brown: #4A2F1B;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f5f7fa;
+  color: var(--dark-green);
+}
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, var(--moss-green), var(--dark-green));
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 8px rgba(0,0,0,.1);
+}
+
+.logo-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo-small {
+  width: 80px;
+  height: auto;
+  margin-bottom: .5rem;
+  filter: brightness(1.2);
+}
+
+.sidebar h2 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.menu {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .8rem 1rem;
+  color: rgba(255,255,255,.85);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all .2s;
+  font-weight: 500;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,.15);
+  color: white;
+}
+
+.menu-item.active {
+  background: rgba(255,255,255,.25);
+  color: white;
+  font-weight: 600;
+}
+
+.logout-btn {
+  margin-top: auto;
+  padding: .8rem 1rem;
+  background: rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.3);
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .2s;
+}
+
+.logout-btn:hover {
+  background: rgba(255,255,255,.3);
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: var(--dark-green);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--powder-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--dark-green);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.12);
+}
+
+.stat-card h3 {
+  font-size: .9rem;
+  color: var(--glaucous);
+  margin-bottom: .5rem;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--moss-green);
+}
+
+/* Data Section */
+.data-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+.data-section h2 {
+  margin-bottom: 1.5rem;
+  color: var(--dark-green);
+}
+
+.activity-list {
+  min-height: 200px;
+}
+
+.activity-items {
+  list-style: none;
+}
+
+.activity-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background .2s;
+}
+
+.activity-item:hover {
+  background: #f9fafb;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  font-size: 1.5rem;
+}
+
+.activity-details {
+  flex: 1;
+}
+
+.activity-details strong {
+  display: block;
+  margin-bottom: .25rem;
+  color: var(--dark-green);
+}
+
+.activity-details small {
+  color: #6b7280;
+  font-size: .85rem;
+}
+
+.no-data, .error-msg {
+  text-align: center;
+  padding: 2rem;
+  color: #9ca3af;
+}
+
+.error-msg {
+  color: #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .menu {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+  
+  .logout-btn {
+    margin-top: 1rem;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

@@ -52,21 +52,58 @@ form.addEventListener('submit', async (e) => {
     feedback.classList.add('error');
     return;
   }
-  // Simulación de llamada a API
-  feedback.textContent = 'Procesando...';
+
+  feedback.textContent = 'Iniciando sesión...';
+  
   try {
-    await new Promise(r => setTimeout(r, 800));
-    // Ejemplo simple: aceptar si password === 'boza123'
-    if (passwordInput.value === 'boza123') {
-      feedback.textContent = '¡Ingreso exitoso!';
-      feedback.classList.add('success');
-      form.reset();
-    } else {
-      feedback.textContent = 'Credenciales inválidas.';
-      feedback.classList.add('error');
+    // Autenticación con Firebase
+    const userCredential = await auth.signInWithEmailAndPassword(
+      emailInput.value.trim(),
+      passwordInput.value
+    );
+    
+    const user = userCredential.user;
+    
+    // Guardar información del usuario en Firestore (opcional)
+    await db.collection('usuarios').doc(user.uid).set({
+      email: user.email,
+      ultimoAcceso: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    feedback.textContent = '¡Ingreso exitoso!';
+    feedback.classList.add('success');
+    
+    // Redirigir al dashboard después de 1 segundo
+    setTimeout(() => {
+      window.location.href = 'Administrador/Pantallas/Dashboard.html';
+    }, 1000);
+    
+  } catch (error) {
+    console.error('Error de autenticación:', error);
+    
+    let mensaje = 'Error al iniciar sesión.';
+    
+    switch (error.code) {
+      case 'auth/user-not-found':
+        mensaje = 'Usuario no encontrado.';
+        break;
+      case 'auth/wrong-password':
+        mensaje = 'Contraseña incorrecta.';
+        break;
+      case 'auth/invalid-email':
+        mensaje = 'Correo inválido.';
+        break;
+      case 'auth/user-disabled':
+        mensaje = 'Usuario deshabilitado.';
+        break;
+      case 'auth/too-many-requests':
+        mensaje = 'Demasiados intentos. Intenta más tarde.';
+        break;
+      default:
+        mensaje = `Error: ${error.message}`;
     }
-  } catch (err) {
-    feedback.textContent = 'Error inesperado.';
+    
+    feedback.textContent = mensaje;
     feedback.classList.add('error');
   }
 });

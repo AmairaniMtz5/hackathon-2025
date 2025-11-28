@@ -1,0 +1,20 @@
+# Variables de entorno
+.env
+.env.local
+
+# Credenciales sensibles
+firebase-config-private.js
+
+# Dependencias
+node_modules/
+package-lock.json
+
+# Cache y logs
+.cache/
+*.log
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+venv/

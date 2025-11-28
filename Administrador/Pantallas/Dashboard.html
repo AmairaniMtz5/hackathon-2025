@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Boza</title>
+  <link rel="stylesheet" href="../CSS/dashboard.css">
+  
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="logo-section">
+        <img src="../../assets/logo.png" alt="Logo Boza" class="logo-small">
+        <h2>Boza Admin</h2>
+      </div>
+      <nav class="menu">
+        <a href="Dashboard.html" class="menu-item active">📊 Dashboard</a>
+        <a href="Usuarios.html" class="menu-item">👥 Usuarios</a>
+        <a href="Monitoreo.html" class="menu-item">🔍 Monitoreo</a>
+        <a href="Mapa.html" class="menu-item">🗺️ Mapa</a>
+        <a href="Historial.html" class="menu-item">📋 Historial</a>
+      </nav>
+      <button id="logoutBtn" class="logout-btn">🚪 Cerrar Sesión</button>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <h1>Dashboard</h1>
+        <div class="user-info">
+          <span id="userEmail">Cargando...</span>
+          <div class="user-avatar" id="userAvatar">👤</div>
+        </div>
+      </header>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <h3>Usuarios Activos</h3>
+          <p class="stat-number" id="activeUsers">--</p>
+        </div>
+        <div class="stat-card">
+          <h3>Recolecciones Hoy</h3>
+          <p class="stat-number" id="collectionsToday">--</p>
+        </div>
+        <div class="stat-card">
+          <h3>Material Reciclado</h3>
+          <p class="stat-number" id="recycledMaterial">-- kg</p>
+        </div>
+        <div class="stat-card">
+          <h3>CO₂ Ahorrado</h3>
+          <p class="stat-number" id="co2Saved">-- kg</p>
+        </div>
+      </div>
+
+      <div class="data-section">
+        <h2>Actividad Reciente</h2>
+        <div id="recentActivity" class="activity-list">
+          <p>Cargando actividad...</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../../firebase-config.js"></script>
+  <script src="../JS/dashboard.js"></script>
+</body>
+</html>
