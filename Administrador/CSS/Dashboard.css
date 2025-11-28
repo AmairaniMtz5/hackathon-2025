@@ -50,13 +50,13 @@ body {
 
 /* Side Panel */
 .side-panel { width:300px; background: linear-gradient(160deg, rgba(236,230,157,0.85), rgba(122,148,69,0.9)); padding:2rem 1.4rem; border-radius:28px; box-shadow: -8px -8px 16px rgba(255,255,255,.55), 10px 10px 22px rgba(0,0,0,.25); display:flex; flex-direction:column; }
-.panel-title { font-size:1.05rem; margin:0 0 1.4rem; letter-spacing:1px; font-weight:600; }
-.panel-menu { display:flex; flex-direction:column; gap:1.1rem; }
-.panel-item { position:relative; display:flex; align-items:center; gap:.9rem; text-decoration:none; color: var(--dark-green); padding:.75rem 1rem .75rem 3.3rem; background: var(--powder-blue); border-radius:14px; font-weight:600; letter-spacing:.4px; box-shadow: -5px -5px 10px rgba(255,255,255,.55), 6px 6px 14px rgba(0,0,0,.18); transition:.25s; }
+.panel-title { font-size:.95rem; margin:0 0 2rem; letter-spacing:1.2px; font-weight:600; text-align:center; }
+.panel-menu { display:flex; flex-direction:column; gap:1.5rem; }
+.panel-item { position:relative; display:flex; align-items:center; gap:.9rem; text-decoration:none; color: var(--dark-green); padding:1rem 1.2rem 1rem 4.2rem; background: var(--powder-blue); border-radius:16px; font-weight:600; letter-spacing:.4px; box-shadow: -5px -5px 10px rgba(255,255,255,.55), 6px 6px 14px rgba(0,0,0,.18); transition:.25s; min-height:64px; }
 .panel-item:hover { transform: translateY(-3px); box-shadow: -7px -7px 14px rgba(255,255,255,.55), 8px 8px 16px rgba(0,0,0,.22); }
 .panel-item.active { background: var(--glaucous); color:#fff; }
-.panel-icon { position:absolute; left:.85rem; width:46px; height:46px; background: var(--vanilla); display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:1.3rem; box-shadow: -4px -4px 8px rgba(255,255,255,.6), 4px 4px 10px rgba(0,0,0,.18); }
-.panel-text { font-size:.85rem; }
+.panel-icon { position:absolute; left:1rem; width:46px; height:46px; background: var(--vanilla); display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:1.4rem; box-shadow: -4px -4px 8px rgba(255,255,255,.6), 4px 4px 10px rgba(0,0,0,.18); }
+.panel-text { font-size:.9rem; line-height:1.4; }
 
 /* Workspace */
 .workspace { flex:1; display:flex; flex-direction:column; gap:1.6rem; }

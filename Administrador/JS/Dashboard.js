@@ -1,19 +1,31 @@
 // Proteger ruta: verificar autenticación
-auth.onAuthStateChanged((user) => {
-  if (!user) {
-    // No autenticado, redirigir al login
-    window.location.href = '../../index.html';
-    return;
-  }
-  
-  // Usuario autenticado, cargar datos
-  loadUserData(user);
-  loadDashboardStats();
-  loadRecentActivity();
+const firebaseReady = typeof auth !== 'undefined' && typeof db !== 'undefined' && typeof firebase !== 'undefined' && typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey !== 'TU_API_KEY_AQUI';
 
-  // Actualizar hora de última actualización
-  updateLastUpdate();
-});
+if (!firebaseReady) {
+  // Modo local: verificar sesión con localStorage
+  const localUser = localStorage.getItem('bozaLocalUser');
+  if (!localUser) {
+    window.location.href = '../../index.html';
+  } else {
+    const user = JSON.parse(localUser);
+    loadUserData(user);
+    loadDashboardStats();
+    loadRecentActivity();
+    updateLastUpdate();
+  }
+} else {
+  // Modo Firebase
+  auth.onAuthStateChanged((user) => {
+    if (!user) {
+      window.location.href = '../../index.html';
+      return;
+    }
+    loadUserData(user);
+    loadDashboardStats();
+    loadRecentActivity();
+    updateLastUpdate();
+  });
+}
 
 // Cargar información del usuario
 function loadUserData(user) {
@@ -162,6 +174,15 @@ function getActivityIcon(type) {
 
 // Cerrar sesión
 document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+  const firebaseReady = typeof auth !== 'undefined' && typeof firebaseConfig !== 'undefined' && firebaseConfig.apiKey !== 'TU_API_KEY_AQUI';
+  
+  if (!firebaseReady) {
+    // Modo local: borrar sesión de localStorage
+    localStorage.removeItem('bozaLocalUser');
+    window.location.href = '../../index.html';
+    return;
+  }
+  
   try {
     await auth.signOut();
     window.location.href = '../../index.html';
