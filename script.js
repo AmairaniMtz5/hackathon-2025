@@ -68,6 +68,8 @@ form.addEventListener('submit', async (e) => {
     ];
     const found = LOCAL_USERS.find(u => u.email === emailInput.value.trim() && u.password === passwordInput.value);
     if (found) {
+      // Guardar sesión en localStorage
+      localStorage.setItem('bozaLocalUser', JSON.stringify({ email: found.email }));
       feedback.textContent = '¡Ingreso exitoso (local)!';
       feedback.classList.add('success');
       setTimeout(() => {
